@@ -4,14 +4,12 @@
 
 import streamlit as st
 import re, os
-from dotenv import load_dotenv
 from openai import OpenAI
 
 # =========================================================
 # CONFIG
 # =========================================================
-load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 st.set_page_config(layout="wide", page_title="AI Agro Negotiation POC")
 
 # =========================================================
@@ -171,3 +169,4 @@ st.subheader("💬 Chat Histories")
 for key,label in [("web_chat","Web"),("wa_chat","WhatsApp"),("call_chat","Telecalling")]:
     st.markdown(f"**{label} Chat**")
     for s,m in st.session_state[key]: bubble(m,s)
+
